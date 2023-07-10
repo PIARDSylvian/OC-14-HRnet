@@ -1,7 +1,9 @@
 import { useEffect, ChangeEvent, FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import states from '../../states.json'
-import Select from 'react-select';
+import Select from 'react-select'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
 
 type employee = {
   firstName: string | null,
@@ -100,10 +102,10 @@ export default function Home() {
         <input type="text" id="lastName" onChange={handleChange}/>
 
         <label htmlFor="dateOfBirth">Date of Birth</label>
-        <input id="dateOfBirth" type="text" onChange={handleChange}/>
+        <DatePicker selected={form.dateOfBirth} onChange={(date) => handleSelctChange({value : date, id:'dateOfBirth' })}/>
 
         <label htmlFor="startDate">Start Date</label>
-        <input id="startDate" type="text" onChange={handleChange}/>
+        <DatePicker  selected={form.startDate} onChange={(date) => handleSelctChange({value : date, id:'startDate' })}/>
 
         <fieldset className="address">
           <legend>Address</legend>
