@@ -1,18 +1,7 @@
 import { useEffect, ChangeEvent, FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import states from '../../states.json'
-
-const INITIAL_STATE = {
-  firstName: '',
-  lastName: '',
-  dateOfBirth: '',
-  startDate: '',
-  department: '',
-  street: '',
-  city: '',
-  state: states[0].abbreviation,
-  zipCode: ''
-};
+import Select from 'react-select';
 
 type employee = {
   firstName: string | null,
@@ -28,6 +17,45 @@ type employee = {
 
 type employees = employee[]
 
+const departementOptions = [
+  {
+    value: "Sales",
+    label: "Sales"
+  },
+  {
+    value: "Marketing",
+    label: "Marketing"
+  },
+  {
+    value: "Engineering",
+    label: "Engineering"
+  },
+  {
+    value: "Human Resources",
+    label: "Human Resources"
+  },
+  {
+    value: "Legal",
+    label: "Legal"
+  }
+];
+
+const stateOption = states.map((state) => {
+  return {value: state.abbreviation, label: state.name}
+})
+
+const INITIAL_STATE = {
+  firstName: '',
+  lastName: '',
+  dateOfBirth: '',
+  startDate: '',
+  department: departementOptions[0].value,
+  street: '',
+  city: '',
+  state: states[0].abbreviation,
+  zipCode: ''
+};
+
 export default function Home() {
   const [form, setForm] = useState(INITIAL_STATE);
 
@@ -35,13 +63,19 @@ export default function Home() {
     document.title = 'Home - HRnet'
   }, [])
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-
+  const handleChange = (event: ChangeEvent<HTMLInputElement >) => {
     setForm({
       ...form,
       [event.target.id]: event.target.value,
     });
   };
+
+  const handleSelctChange = (event:object) => {
+    setForm({
+      ...form,
+      [event.id]: event.value,
+    });
+  }
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -50,6 +84,7 @@ export default function Home() {
     employees.push(form);
     localStorage.setItem('employees', JSON.stringify(employees));
     // // $('#confirmation').modal(); open modal here
+    console.log(localStorage.getItem('employees'))
   }
 
   return (
@@ -80,24 +115,26 @@ export default function Home() {
           <input id="city" type="text" onChange={handleChange}/>
 
           <label htmlFor="state">State</label>
-          <select name="state" id="state" onChange={handleChange}>
-            {states.map((state, idx)=>(
-              <option key={`state-${idx}`} value={state.abbreviation} >{state.name}</option>
-            ))}
-          </select>
+          <Select
+            onChange={(e) => handleSelctChange({...e, id:'state' })}
+            defaultValue={stateOption[0]}
+            options={stateOption}
+            inputId="state"
+            isSearchable={false}
+          />
 
           <label htmlFor="zipCode">Zip Code</label>
           <input id="zipCode" type="number" onChange={handleChange}/>
         </fieldset>
 
         <label htmlFor="department">Department</label>
-        <select name="department" id="department" onChange={handleChange}>
-          <option>Sales</option>
-          <option>Marketing</option>
-          <option>Engineering</option>
-          <option>Human Resources</option>
-          <option>Legal</option>
-        </select>
+        <Select
+          onChange={(e) => handleSelctChange({...e, id:'department' })}
+          defaultValue={departementOptions[0]}
+          options={departementOptions}
+          inputId="department"
+          isSearchable={false}
+        />
         <button type="submit">Save</button>
       </form>
     </>
