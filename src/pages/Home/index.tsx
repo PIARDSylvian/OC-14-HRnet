@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import states from '../../states.json'
 import Select from 'react-select'
 import DatePicker from "react-datepicker"
+import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css";
 
 type employee = {
@@ -60,10 +61,13 @@ const INITIAL_STATE = {
 
 export default function Home() {
   const [form, setForm] = useState(INITIAL_STATE);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     document.title = 'Home - HRnet'
   }, [])
+
+  Modal.setAppElement('#root');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement >) => {
     setForm({
@@ -85,9 +89,12 @@ export default function Home() {
     const employees = JSON.parse(localStorage.getItem('employees')|| '[]') as employees;
     employees.push(form);
     localStorage.setItem('employees', JSON.stringify(employees));
-    // // $('#confirmation').modal(); open modal here
+    handleOpenModal()
     console.log(localStorage.getItem('employees'))
   }
+
+  const handleOpenModal = () => setIsOpen(true);
+  const handleCloseModal = () => setIsOpen(false);
 
   return (
     <>
@@ -139,6 +146,15 @@ export default function Home() {
         />
         <button type="submit">Save</button>
       </form>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={handleCloseModal}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <div >Employee Created!</div>
+        <button onClick={handleCloseModal}>X</button>
+      </Modal>
     </>
   )
 }
