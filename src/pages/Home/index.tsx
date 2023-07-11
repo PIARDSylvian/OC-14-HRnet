@@ -76,7 +76,7 @@ export default function Home() {
 
   type EventType = {
     id : string,
-    value : string
+    value : string | Date
   } 
 
   const handleSelctChange = (event:EventType) => {
