@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 
 type employee = {
-  firstName: string | null,
+  firstName: string,
   lastName: string,
   dateOfBirth: string,
   startDate: string,
@@ -102,10 +102,10 @@ export default function Home() {
         <input type="text" id="lastName" onChange={handleChange}/>
 
         <label htmlFor="dateOfBirth">Date of Birth</label>
-        <DatePicker selected={form.dateOfBirth} onChange={(date) => handleSelctChange({value : date, id:'dateOfBirth' })}/>
+        <DatePicker selected={form.dateOfBirth} onChange={(date : Date) => handleSelctChange({value : date, id:'dateOfBirth' })}/>
 
         <label htmlFor="startDate">Start Date</label>
-        <DatePicker  selected={form.startDate} onChange={(date) => handleSelctChange({value : date, id:'startDate' })}/>
+        <DatePicker  selected={form.startDate} onChange={(date : Date) => handleSelctChange({value : date, id:'startDate' })}/>
 
         <fieldset className="address">
           <legend>Address</legend>
