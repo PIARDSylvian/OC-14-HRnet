@@ -6,19 +6,17 @@ import DatePicker from "react-datepicker"
 import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css";
 
-type employee = {
+type Employee = {
   firstName: string,
   lastName: string,
-  dateOfBirth: string,
-  startDate: string,
+  dateOfBirth: null | Date,
+  startDate: null | Date,
   department: string,
   street: string,
   city: string,
   state: string,
   zipCode: string
 }
-
-type employees = employee[]
 
 const departementOptions = [
   {
@@ -50,8 +48,8 @@ const stateOption = states.map((state) => {
 const INITIAL_STATE = {
   firstName: '',
   lastName: '',
-  dateOfBirth: '',
-  startDate: '',
+  dateOfBirth: null,
+  startDate: null,
   department: departementOptions[0].value,
   street: '',
   city: '',
@@ -60,7 +58,7 @@ const INITIAL_STATE = {
 };
 
 export default function Home() {
-  const [form, setForm] = useState(INITIAL_STATE);
+  const [form, setForm] = useState<Employee>(INITIAL_STATE);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -76,7 +74,12 @@ export default function Home() {
     });
   };
 
-  const handleSelctChange = (event:object) => {
+  type EventType = {
+    id : string,
+    value : string
+  } 
+
+  const handleSelctChange = (event:EventType) => {
     setForm({
       ...form,
       [event.id]: event.value,
@@ -86,11 +89,10 @@ export default function Home() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     
-    const employees = JSON.parse(localStorage.getItem('employees')|| '[]') as employees;
-    employees.push(form);
-    localStorage.setItem('employees', JSON.stringify(employees));
+    const employees = JSON.parse(localStorage.getItem('employees')|| '[]') as Employee[];
+    employees.push(form)
+    localStorage.setItem('employees', JSON.stringify(employees))
     handleOpenModal()
-    console.log(localStorage.getItem('employees'))
   }
 
   const handleOpenModal = () => setIsOpen(true);
@@ -125,7 +127,7 @@ export default function Home() {
 
           <label htmlFor="state">State</label>
           <Select
-            onChange={(e) => handleSelctChange({...e, id:'state' })}
+            onChange={(e) => handleSelctChange({...e, id:'state' } as EventType)}
             defaultValue={stateOption[0]}
             options={stateOption}
             inputId="state"
@@ -138,7 +140,7 @@ export default function Home() {
 
         <label htmlFor="department">Department</label>
         <Select
-          onChange={(e) => handleSelctChange({...e, id:'department' })}
+          onChange={(e) => handleSelctChange({...e, id:'department' } as EventType)}
           defaultValue={departementOptions[0]}
           options={departementOptions}
           inputId="department"
