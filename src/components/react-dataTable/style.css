@@ -1,0 +1,5 @@
+.table-container .table-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5em;
+}
