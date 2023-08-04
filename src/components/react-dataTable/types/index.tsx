@@ -7,12 +7,10 @@ export interface FilterInterface {
     order: string,
 }
 
-export type SearchType = string
-
 export interface Initial_state_interface {
     filters : FilterInterface,
     entries: number,
-    search: SearchType,
+    search: string,
     data: DataInterface[]
 }
 
