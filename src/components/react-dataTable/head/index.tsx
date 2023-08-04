@@ -1,14 +1,14 @@
 import './style.css'
 
-type props = {
-    columns : string[],
-    filter : { filter : string, order : string},
-    changeFilter : (data:string)=>void
-    options? : Array<string|null> | null
+interface Props {
+    columns: string[],
+    filter: { filter: string, order: string},
+    changeFilter: (data: string)=>void
+    options?: (string|null)[] | null
 }
 
-export default function Head({columns, filter, changeFilter, options}: props) :JSX.Element {
-    const changeOrderByColumn = (column : string) => changeFilter(column)
+export default function Head({columns, filter, changeFilter, options}: Props): JSX.Element {
+    const changeOrderByColumn = (column: string) => changeFilter(column)
 
     return (
         <>

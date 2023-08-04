@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import './style.css'
 
-type props = {
-    entries : number,
-    changeEntries: (e:number)=>void
-    options? : null | string[]
+interface Props {
+    entries: number,
+    changeEntries: (e: number)=>void
+    options?: null | string[]
 }
 
-export default function Select({entries, changeEntries, options}: props) :JSX.Element {
+export default function Select({entries, changeEntries, options}: Props): JSX.Element {
     useEffect(()=> {
         if(options) {
             const [firstOption] = options;

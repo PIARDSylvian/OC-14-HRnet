@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
 import './style.css'
+import { DataInterface } from "../types"
 
-type dataType = {
-    [key :string ] : string
+interface Props {
+    table: DataInterface[],
+    entries: number,
+    changePaginatedData: (data: DataInterface[])=>void
 }
 
-type props = {
-    table : dataType[],
-    entries : number,
-    changePaginatedData : (data:dataType[])=>void
-}
-
-export default function Foot({table, entries, changePaginatedData}: props) :JSX.Element {
+export default function Foot({table, entries, changePaginatedData}: Props): JSX.Element {
     const [index, setIndex] = useState<number>(1);
     const step = Math.ceil(table.length / entries)
 
