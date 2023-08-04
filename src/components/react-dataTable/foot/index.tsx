@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import './style.css'
 import { DataInterface } from "../types"
+import style from './style.module.scss'
 
 interface Props {
     table: DataInterface[],
@@ -15,7 +15,7 @@ export default function Foot({table, entries, changePaginatedData}: Props): JSX.
     const paginateButton = [];
     for (let idx = 1; idx <= step; idx++) {
         if(idx >= index-1 && idx < index + 2) {
-            paginateButton.push(<button className={(index === idx)? 'current': ''} key={`page-${idx}`} onClick={()=>paginate(idx)}>{idx}</button>)
+            paginateButton.push(<button className={(index === idx)? style['current']: ''} key={`page-${idx}`} onClick={()=>paginate(idx)}>{idx}</button>)
         }    
     }
 
@@ -32,7 +32,7 @@ export default function Foot({table, entries, changePaginatedData}: Props): JSX.
     }
 
     return (
-        <div className='table-footer'>
+        <div className={style['table-footer']}>
             <div>
                 <p>{`Showing ${((index-1) * entries) + 1} to ${(index * entries > table.length)? table.length: index * entries} of ${table.length} entries`}</p>
             </div>

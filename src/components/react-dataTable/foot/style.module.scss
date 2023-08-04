@@ -1,0 +1,21 @@
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+
+    &>div {
+        display: flex;
+        align-items: center;
+    }
+
+    button {
+        margin: 0 .5em;
+        border-radius: .2em;
+        border: solid 1px;
+        padding: .5em 1em;
+
+        &.current {
+            background-color: lightgray;
+            text-decoration: underline;
+        }
+    }
+}

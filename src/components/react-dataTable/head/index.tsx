@@ -1,4 +1,4 @@
-import './style.css'
+import style from './style.module.scss'
 
 interface Props {
     columns: string[],
@@ -12,10 +12,10 @@ export default function Head({columns, filter, changeFilter, options}: Props): J
 
     return (
         <>
-            <thead>
+            <thead className={style['thead']}>
                 <tr>
                     {columns.map((column, idx) => (
-                        <th key={`${column}-${idx}`} className={`${(filter.filter == column)?(filter.order == 'asc')? 'asc': 'desc':''}`} onClick={() => changeOrderByColumn(column)}>
+                        <th key={`${column}-${idx}`} className={`${(filter.filter == column)?(filter.order == 'asc')? style['asc']: style['desc']:''}`} onClick={() => changeOrderByColumn(column)}>
                             {(options && options[idx])? options[idx]: column}
                         </th>
                     ))}

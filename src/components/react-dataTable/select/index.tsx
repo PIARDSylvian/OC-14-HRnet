@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import './style.css'
+import style from './style.module.scss'
 
 interface Props {
     entries: number,
@@ -18,7 +18,7 @@ export default function Select({entries, changeEntries, options}: Props): JSX.El
 
     return (
         <>
-            <div className='table-select-entries'>
+            <div className={style['table-select-entries']}>
                 <label htmlFor="select-entries">Show</label>
                 <select id="select-entries" value={entries} onChange={(e) => changeEntries(parseInt(e.target.value, 10))}>
                     {

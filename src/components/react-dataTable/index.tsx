@@ -5,7 +5,7 @@ import Search from './search'
 import reorder from './utils'
 import Foot from './foot'
 import { isValid, format, parseISO } from 'date-fns'
-import './style.css'
+import style from './style.module.scss'
 import { Initial_state_interface, DataInterface, OptionInterface } from "./types"
 
 const INITIAL_STATE = {
@@ -64,22 +64,22 @@ export default function ReactDataTable({data , option = null}: props): JSX.Eleme
 
     return (
         <>
-        <div className='table-container'>
+        <div>
             {
             (!data || data.length < 1) 
                 ? 'no data'
                 :
                     <>
-                    <div className='table-header'>
+                    <div className={style['table-header']}>
                         <Select entries={entries} changeEntries={changeEntries} options={option?.select}/>
                         <Search search={search} changeSearch={changeSearch}/>
                     </div>
-                    <table>
+                    <table className={style['table']}>
                         <Head columns={columnsHeader} filter={filters} changeFilter={changeFilter} options={option?.head}/>
-                        <tbody>
+                        <tbody className={style.tbody}>
                             {paginatedData.map((row,idx)=>(
-                                <tr key={`${idx}-row`}>
-                                    {columnsHeader.map((column, idx)=>(<td key={`column-${idx}`} className={`${(column === filters.filter)? 'filter': ''}`}>{(isDate(row[column]))? isDate(row[column]) : row[column]}</td>))}
+                                <tr key={`${idx}-row`} className={style.tr}>
+                                    {columnsHeader.map((column, idx)=>(<td key={`column-${idx}`} className={`${(column === filters.filter)? style['filter']: ''}`}>{(isDate(row[column]))? isDate(row[column]) : row[column]}</td>))}
                                 </tr>
                             ))}
                             
