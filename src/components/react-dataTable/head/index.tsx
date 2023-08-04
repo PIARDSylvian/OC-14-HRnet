@@ -1,13 +1,24 @@
 import style from './style.module.scss'
 
-interface Props {
+interface PropsInterface {
     columns: string[],
-    filter: { filter: string, order: string},
+    filter: {filter: string, order: string},
     changeFilter: (data: string)=>void
     options?: (string|null)[] | null
 }
 
-export default function Head({columns, filter, changeFilter, options}: Props): JSX.Element {
+/**
+ * Render Table Header
+ * 
+ * @param {PropsInterface} props
+ * @param {string[]} props.column
+ * @param {{filter: string, order: string}} props.filter
+ * @param {Function} props.changeFilter
+ * @param {(string|null)[] | null} [props.options]
+ * 
+ * @returns {JSX.Element}
+ */
+export default function Head({columns, filter, changeFilter, options}: PropsInterface): JSX.Element {
     const changeOrderByColumn = (column: string) => changeFilter(column)
 
     return (

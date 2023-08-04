@@ -1,13 +1,23 @@
 import { useEffect } from 'react'
 import style from './style.module.scss'
 
-interface Props {
+interface PropsInterface {
     entries: number,
     changeEntries: (e: number)=>void
     options?: null | string[]
 }
 
-export default function Select({entries, changeEntries, options}: Props): JSX.Element {
+/**
+ * Render Select
+ * 
+ * @param {PropsInterface} props
+ * @param {number} props.entries
+ * @param {Function} props.changeEntries
+ * @param {null | string[]} [props.options]
+ * 
+ * @returns {JSX.Element}
+ */
+export default function Select({entries, changeEntries, options}: PropsInterface): JSX.Element {
     useEffect(()=> {
         if(options) {
             const [firstOption] = options;

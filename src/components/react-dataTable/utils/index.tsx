@@ -1,6 +1,6 @@
-import { DataInterface, FilterInterface, SearchType } from "../types"
+import { DataInterface, FilterInterface } from "../types"
 
-export default function reorder(filters: FilterInterface, search: SearchType, data: DataInterface[]): DataInterface[] {
+export default function reorder(filters: FilterInterface, search: string, data: DataInterface[]): DataInterface[] {
     const filteredElements = [...data]
 
     filteredElements.sort((a, b) => (a[filters.filter] > b[filters.filter]) ? 1 : -1)
@@ -9,6 +9,6 @@ export default function reorder(filters: FilterInterface, search: SearchType, da
     return (search !== '')? filterByValue(filteredElements, search): filteredElements;
 }
 
-function filterByValue(data: DataInterface[], search: SearchType): DataInterface[] { 
+function filterByValue(data: DataInterface[], search: string): DataInterface[] {
     return data.filter(o => Object.keys(o).some(k => o[k]?.toLowerCase().includes(search.toLowerCase())));
 }

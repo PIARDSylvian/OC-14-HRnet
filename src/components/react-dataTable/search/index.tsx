@@ -1,11 +1,20 @@
 import style from './style.module.scss'
 
-interface Props {
+interface PropsInterface {
     search: string
     changeSearch: (data: string)=>void
 }
 
-export default function Search({search, changeSearch}: Props): JSX.Element {
+/**
+ * Render Search
+ * 
+ * @param {PropsInterface} props
+ * @param {string} props.search
+ * @param {Function} props.changeSearch
+ * 
+ * @returns {JSX.Element}
+ */
+export default function Search({search, changeSearch}: PropsInterface): JSX.Element {
     return (
         <div className={style['table-search']}>
             <label htmlFor="table-search">Search:</label>

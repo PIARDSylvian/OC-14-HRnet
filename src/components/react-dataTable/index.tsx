@@ -18,12 +18,21 @@ const INITIAL_STATE = {
     data: []
 }
 
-interface props {
+interface PropsInterface {
     data: DataInterface[]
     option?: OptionInterface | null
 }
 
-export default function ReactDataTable({data , option = null}: props): JSX.Element {
+/**
+ * Render React Data Table
+ * 
+ * @param {PropsInterface} props
+ * @param {DataInterface[]} props.data data to make table
+ * @param {null | OptionInterface} props.option option to make table
+ * 
+ * @returns {JSX.Element}
+ */
+export default function ReactDataTable({data , option = null}: PropsInterface): JSX.Element {
     const [filters, setFilter] = useState<Initial_state_interface['filters']>(INITIAL_STATE.filters);
     const [entries, setEntries] = useState<Initial_state_interface['entries']>(INITIAL_STATE.entries);
     const [search, setSearch] = useState<Initial_state_interface['search']>(INITIAL_STATE.search);
@@ -48,7 +57,6 @@ export default function ReactDataTable({data , option = null}: props): JSX.Eleme
 
     const changeFilter = (column: Initial_state_interface['filters']['filter']) => {
         const order = (column === filters.filter && filters.order === 'asc')? 'desc' : 'asc'
-        setEntries(entries)
         setFilter({filter: column, order: order})
     }
     
@@ -69,24 +77,24 @@ export default function ReactDataTable({data , option = null}: props): JSX.Eleme
             (!data || data.length < 1) 
                 ? 'no data'
                 :
-                    <>
-                    <div className={style['table-header']}>
-                        <Select entries={entries} changeEntries={changeEntries} options={option?.select}/>
-                        <Search search={search} changeSearch={changeSearch}/>
-                    </div>
-                    <table className={style['table']}>
-                        <Head columns={columnsHeader} filter={filters} changeFilter={changeFilter} options={option?.head}/>
-                        <tbody className={style.tbody}>
-                            {paginatedData.map((row,idx)=>(
-                                <tr key={`${idx}-row`} className={style.tr}>
-                                    {columnsHeader.map((column, idx)=>(<td key={`column-${idx}`} className={`${(column === filters.filter)? style['filter']: ''}`}>{(isDate(row[column]))? isDate(row[column]) : row[column]}</td>))}
-                                </tr>
-                            ))}
-                            
-                        </tbody>
-                    </table>
-                    <Foot table={dataTable} entries={entries} changePaginatedData={changePaginatedData}/>
-                    </>
+                <>
+                <div className={style['table-header']}>
+                    <Select entries={entries} changeEntries={changeEntries} options={option?.select}/>
+                    <Search search={search} changeSearch={changeSearch}/>
+                </div>
+                <table className={style['table']}>
+                    <Head columns={columnsHeader} filter={filters} changeFilter={changeFilter} options={option?.head}/>
+                    <tbody className={style.tbody}>
+                        {paginatedData.map((row,idx)=>(
+                            <tr key={`${idx}-row`} className={style.tr}>
+                                {columnsHeader.map((column, idx)=>(<td key={`column-${idx}`} className={`${(column === filters.filter)? style['filter']: ''}`}>{(isDate(row[column]))? isDate(row[column]) : row[column]}</td>))}
+                            </tr>
+                        ))}
+                        
+                    </tbody>
+                </table>
+                <Foot table={dataTable} entries={entries} changePaginatedData={(changePaginatedData)}/>
+                </>
             } 
         </div>
         </>

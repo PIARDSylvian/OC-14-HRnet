@@ -2,13 +2,23 @@ import { useState, useEffect } from 'react'
 import { DataInterface } from "../types"
 import style from './style.module.scss'
 
-interface Props {
+interface PropsInterface {
     table: DataInterface[],
     entries: number,
     changePaginatedData: (data: DataInterface[])=>void
 }
 
-export default function Foot({table, entries, changePaginatedData}: Props): JSX.Element {
+/**
+ * Render Data Table Footer
+ * 
+ * @param {PropsInterface} props
+ * @param {DataInterface[]} props.data data to paginate
+ * @param {number} props.entries number to paginate
+ * @param {Function} props.changePaginatedData fonction to set paginated data
+ * 
+ * @returns {JSX.Element}
+ */
+export default function Foot({table, entries, changePaginatedData}: PropsInterface): JSX.Element {
     const [index, setIndex] = useState<number>(1);
     const step = Math.ceil(table.length / entries)
 
@@ -44,4 +54,3 @@ export default function Foot({table, entries, changePaginatedData}: Props): JSX.
         </div>
     )
 }
-
