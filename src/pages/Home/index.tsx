@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker"
 import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css";
 
+import './index.scss'
+
 type Employee = {
   firstName: string,
   lastName: string,

@@ -1,0 +1,52 @@
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+  form>button {
+    margin: 1em auto 0;
+    display: block;
+  }
+  
+  label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .address {
+    margin-top: 10px;
+  }
+  
+  .modal {
+    position: absolute;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    border-radius: 4px;
+    padding: 20px 50px;
+    width: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .modal > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    font-weight: 900;
+    background-color: black;
+    border: none;
+    color: white;
+  }
+  
+  .overlay {
+    background-color: rgba(0,0,0,0.75);
+    position: fixed;
+    inset: 0px;
+  }

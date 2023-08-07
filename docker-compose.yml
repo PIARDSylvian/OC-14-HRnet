@@ -8,5 +8,5 @@ services:
     working_dir: /app
     volumes:
       - ./:/app
-    command: sh -c "npm i && npm run dev" # for dev
-    # command: sh -c "npm i && npm run build && npm run preview" # for preview
+    # command: sh -c "npm i && npm run dev" # for dev
+    command: sh -c "npm i && npm run build && npm run preview" # for preview
