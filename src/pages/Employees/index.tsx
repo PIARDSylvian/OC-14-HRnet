@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import ReactDataTable from '../../components/react-dataTable'
+import ReactDataTable from 'react-data-table-oc'
 
 type dataType = {
   [key :string ] : string
