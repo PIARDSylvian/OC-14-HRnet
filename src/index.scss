@@ -3,4 +3,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 1080px;
+  margin: auto;
+
+  @media (max-width: 1080px) {
+    width: 100%;
+  }
 }
