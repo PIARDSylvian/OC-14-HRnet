@@ -1,12 +1,12 @@
-version: "3"
-services: 
-  hrnet:
-    image: node:latest
-    container_name: web
-    ports:
-      - 8000:8000
-    working_dir: /app
-    volumes:
-      - ./:/app
-    # command: sh -c "npm i && npm run dev" # for dev
-    command: sh -c "npm i && npm run build && npm run preview" # for preview
+version: '3'
+services:
+    hrnet:
+        image: node:latest
+        container_name: web
+        ports:
+            - 8000:8000
+        working_dir: /app
+        volumes:
+            - ./:/app
+        # command: sh -c "npm i && npm run dev" # for dev
+        command: sh -c "npm i && npm run build && npm run preview" # for preview

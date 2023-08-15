@@ -3,23 +3,23 @@
     align-items: center;
     justify-content: center;
 }
-  
-  form>button {
+
+form > button {
     margin: 1em auto 0;
     display: block;
-  }
-  
-  label {
+}
+
+label {
     display: block;
     margin-top: 1rem;
     margin-bottom: 10px;
-  }
-  
-  .address {
+}
+
+.address {
     margin-top: 10px;
-  }
-  
-  .modal {
+}
+
+.modal {
     position: absolute;
     border: 1px solid rgb(204, 204, 204);
     background: rgb(255, 255, 255);
@@ -29,9 +29,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-  
-  .modal > button {
+}
+
+.modal > button {
     position: absolute;
     top: 0;
     right: 0;
@@ -43,10 +43,10 @@
     background-color: black;
     border: none;
     color: white;
-  }
-  
-  .overlay {
-    background-color: rgba(0,0,0,0.75);
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.75);
     position: fixed;
     inset: 0px;
-  }
+}
