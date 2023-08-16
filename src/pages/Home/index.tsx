@@ -5,6 +5,10 @@ import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 import Modal from 'react-modal'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { addEmployee } from '../../redux/employees'
+import { selectEmployees } from '../../redux/selector'
+import { format } from 'date-fns'
 
 import './index.scss'
 
@@ -62,6 +66,8 @@ const INITIAL_STATE = {
 export default function Home() {
     const [form, setForm] = useState<Employee>(INITIAL_STATE)
     const [modalIsOpen, setIsOpen] = useState(false)
+    const employees = useSelector(selectEmployees)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         document.title = 'Home - HRnet'
@@ -90,13 +96,21 @@ export default function Home() {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
+        const data: any = { ...form }
 
-        const employees = JSON.parse(
-            localStorage.getItem('employees') || '[]'
-        ) as Employee[]
-        employees.push(form)
-        localStorage.setItem('employees', JSON.stringify(employees))
-        handleOpenModal()
+        data.dateOfBirth =
+            data.dateOfBirth != null
+                ? format(data.dateOfBirth as Date, 'dd/MM/yyyy')
+                : null
+        data.startDate =
+            data.dateOfBirth != null
+                ? format(data.startDate as Date, 'dd/MM/yyyy')
+                : null
+
+        dispatch(addEmployee(data) as any)
+
+        if (!employees.error) handleOpenModal()
+        else console.log(employees.error)
     }
 
     const handleOpenModal = () => setIsOpen(true)
@@ -116,7 +130,9 @@ export default function Home() {
 
                 <label htmlFor="dateOfBirth">Date of Birth</label>
                 <DatePicker
+                    id="dateOfBirth"
                     selected={form.dateOfBirth}
+                    dateFormat="dd/MM/yyyy"
                     onChange={(date: Date) =>
                         handleSelctChange({ value: date, id: 'dateOfBirth' })
                     }
@@ -124,7 +140,9 @@ export default function Home() {
 
                 <label htmlFor="startDate">Start Date</label>
                 <DatePicker
+                    id="startDate"
                     selected={form.startDate}
+                    dateFormat="dd/MM/yyyy"
                     onChange={(date: Date) =>
                         handleSelctChange({ value: date, id: 'startDate' })
                     }
